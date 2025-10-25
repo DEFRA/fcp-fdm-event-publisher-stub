@@ -11,6 +11,25 @@ The Farming Data Model (FDM) service is a common component to support data excha
 
 FDM subscribes to events across the FCP ecosystem via an AWS SQS queue. These events are persisted and precompiled into a data model which can be queried via REST API endpoints.
 
+This stub service simulates the publishing of events to FDM consistent with those published by other FCP services.
+
+The intention of the stub is to support local development and performance testing of FDM without the need to deploy and configure the full suite of FCP services.
+
+## API
+
+When the API is enabled (default for non-production environments) the following endpoints are available:
+
+| Method | Endpoint                          | Description                         |
+|--------|----------------------------------|-------------------------------------|
+| `POST` | `/api/v1/simulate/messages`      | Simulate the publishing of messages to FDM |
+
+All `/api/v1/simulate` endpoints accept the following optional query parameters:
+
+| Parameter   | Type    | Description                                                                 |
+|-------------|---------|-----------------------------------------------------------------------------|
+| `scenario`  | String  | The name of a specific scenario to simulate. If not provided all scenarios will be simulated. |
+| `repetitions` | Integer | The number of times to repeat the scenario(s). Default is `1`. |
+
 ## Requirements
 
 ### Docker
