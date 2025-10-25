@@ -1,5 +1,10 @@
+import { config } from '../config.js'
 import { health } from '../routes/health.js'
 import { messages } from '../routes/messages.js'
+
+const isApiEnabled = config.get('api.enabled')
+
+const apiRoutes = isApiEnabled ? [messages] : []
 
 const router = {
   plugin: {
@@ -8,7 +13,7 @@ const router = {
       server.route(
         [].concat(
           health,
-          messages
+          apiRoutes
         )
       )
     }

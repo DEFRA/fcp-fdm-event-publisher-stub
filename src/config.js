@@ -136,6 +136,14 @@ const config = convict({
       default: 'x-cdp-request-id',
       env: 'TRACING_HEADER'
     }
+  },
+  api: {
+    enabled: {
+      doc: 'Enable API endpoints',
+      format: Boolean,
+      default: process.env.ENVIRONMENT !== 'prod',
+      env: 'API_ENABLED'
+    }
   }
 })
 
