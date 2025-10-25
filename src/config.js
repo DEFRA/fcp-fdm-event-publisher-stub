@@ -23,7 +23,7 @@ const config = convict({
   port: {
     doc: 'The port to bind',
     format: 'port',
-    default: 3001,
+    default: 3002,
     env: 'PORT'
   },
   serviceName: {
@@ -73,12 +73,55 @@ const config = convict({
         : ['req', 'res', 'responseTime']
     }
   },
+  aws: {
+    region: {
+      doc: 'AWS region',
+      format: String,
+      default: 'eu-west-2',
+      env: 'AWS_REGION'
+    },
+    endpoint: {
+      doc: 'AWS endpoint URL, for example to use with LocalStack',
+      format: String,
+      nullable: true,
+      default: null,
+      env: 'AWS_ENDPOINT_URL'
+    },
+    accessKeyId: {
+      doc: 'AWS access key ID',
+      format: String,
+      nullable: true,
+      default: null,
+      env: 'AWS_ACCESS_KEY_ID'
+    },
+    secretAccessKey: {
+      doc: 'AWS secret access key',
+      format: String,
+      nullable: true,
+      default: null,
+      env: 'AWS_SECRET_ACCESS_KEY'
+    },
+    sns: {
+      topicArn: {
+        doc: 'AWS SNS topic ARN',
+        format: String,
+        env: 'AWS_SNS_TOPIC_ARN',
+        default: null
+      }
+    }
+  },
   httpProxy: {
     doc: 'HTTP Proxy URL',
     format: String,
     nullable: true,
     default: null,
     env: 'HTTP_PROXY'
+  },
+  isSecureContextEnabled: {
+    doc: 'Enable Secure Context',
+    format: Boolean,
+    default: isProduction,
+    env: 'ENABLE_SECURE_CONTEXT'
   },
   isMetricsEnabled: {
     doc: 'Enable metrics reporting',
@@ -92,6 +135,14 @@ const config = convict({
       format: String,
       default: 'x-cdp-request-id',
       env: 'TRACING_HEADER'
+    }
+  },
+  api: {
+    enabled: {
+      doc: 'Enable API endpoints',
+      format: Boolean,
+      default: process.env.ENVIRONMENT !== 'prod',
+      env: 'API_ENABLED'
     }
   }
 })

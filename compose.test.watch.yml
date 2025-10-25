@@ -1,0 +1,3 @@
+services:
+  fcp-fdm-event-publisher-stub:
+    command: npm run test:watch
