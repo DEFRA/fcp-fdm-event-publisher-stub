@@ -3,10 +3,6 @@ import { describe, test, beforeEach, afterEach, vi, expect } from 'vitest'
 
 const { HTTP_STATUS_OK } = httpConstants
 
-vi.mock('../../../../src/events/polling.js', () => ({
-  pollForEvents: vi.fn()
-}))
-
 const { createServer } = await import('../../../../src/server.js')
 
 let server

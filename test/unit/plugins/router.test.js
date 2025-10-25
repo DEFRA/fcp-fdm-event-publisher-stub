@@ -36,6 +36,6 @@ describe('router plugin', () => {
 
   test('should register messages route', () => {
     router.plugin.register(mockServer)
-    expect(mockServer.route).toHaveBeenCalledWith(expect.arrayContaining(messages))
+    expect(mockServer.route).toHaveBeenCalledWith(expect.arrayContaining([messages]))
   })
 })

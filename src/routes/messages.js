@@ -2,7 +2,7 @@ import Joi from 'joi'
 import { simulateMessages } from '../simulate/messages.js'
 
 const messages = {
-  method: 'GET',
+  method: 'POST',
   path: '/api/v1/simulate/messages',
   options: {
     description: 'Simulate messages from Single Front Door Comms',

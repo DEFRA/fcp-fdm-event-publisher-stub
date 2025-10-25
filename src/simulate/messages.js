@@ -18,9 +18,12 @@ export async function simulateMessages ({ scenario, repetitions }) {
 
   for (let i = 0; i < repetitions; i++) {
     for (const s of scenarios) {
+      const correlationId = crypto.randomUUID()
+
       for (const event of s) {
         event.id = crypto.randomUUID()
         event.time = new Date().toISOString()
+        event.data.correlationId = correlationId
 
         await snsClient.send(
           new PublishCommand({
@@ -28,7 +31,7 @@ export async function simulateMessages ({ scenario, repetitions }) {
             TopicArn: sns.topicArn
           })
         )
-        console.log(`Simulating event: ${event.id} - ${event.type} (Repetition ${i + 1})`)
+        console.log(`Simulating event: ${event.id} - ${event.type} (Repetition ${i + 1}, correlationId: ${correlationId})`)
       }
     }
   }

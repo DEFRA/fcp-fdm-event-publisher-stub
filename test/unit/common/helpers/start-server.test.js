@@ -90,18 +90,10 @@ describe('startServer', () => {
       )
       expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
         2,
-        'Setting up MongoDb'
-      )
-      expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
-        3,
-        'MongoDb connected to fcp-fdm'
-      )
-      expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
-        4,
         'Server started successfully'
       )
       expect(mockHapiLoggerInfo).toHaveBeenNthCalledWith(
-        5,
+        3,
         'Access your backend on http://localhost:3098'
       )
     })
