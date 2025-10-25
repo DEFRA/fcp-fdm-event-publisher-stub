@@ -15,6 +15,7 @@ const snsClient = new SNSClient({
 
 export async function simulateMessages ({ scenario, repetitions }) {
   const scenarios = getScenarios(scenario)
+  let totalEvents = 0
 
   for (let i = 0; i < repetitions; i++) {
     for (const s of scenarios) {
@@ -24,6 +25,7 @@ export async function simulateMessages ({ scenario, repetitions }) {
         event.id = crypto.randomUUID()
         event.time = new Date().toISOString()
         event.data.correlationId = correlationId
+        totalEvents++
 
         await snsClient.send(
           new PublishCommand({
@@ -36,14 +38,13 @@ export async function simulateMessages ({ scenario, repetitions }) {
     }
   }
 
-  return { scenarios: scenarios.length, repetitions }
+  return { scenarios: scenarios.length, events: totalEvents, repetitions }
 }
 
 function getScenarios (scenario) {
+  const wrap = x => Array.isArray(x) ? x : [x]
   if (scenario) {
-    return [getScenario(scenario)]
+    return [wrap(getScenario(scenario))]
   }
-
-  const availableScenarios = listScenarios()
-  return availableScenarios.map(s => getScenario(s.path))
+  return listScenarios().map(s => wrap(getScenario(s.path)))
 }
