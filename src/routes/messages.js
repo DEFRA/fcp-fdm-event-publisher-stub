@@ -14,7 +14,7 @@ const messages = {
     validate: {
       query: {
         scenario: Joi.string().allow('').description('The scenario CRN to simulate messages for. If not provided, all known scenarios will be used'),
-        repetitions: Joi.number().integer().min(1).max(1000).default(1).description('The number of times to repeat the scenario')
+        repetitions: Joi.number().integer().min(1).max(100000).default(1).description('The number of times to repeat the scenario')
       }
     }
   },
