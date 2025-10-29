@@ -4,8 +4,11 @@ import { PublishCommand, SNSClient } from '@aws-sdk/client-sns'
 import { NodeHttpHandler } from '@smithy/node-http-handler'
 import { config } from '../config.js'
 import { getScenario, listScenarios } from './scenarios.js'
+import { createLogger } from '../common/helpers/logging/logger.js'
 
 const { sns, region, endpoint, accessKeyId, secretAccessKey } = config.get('aws')
+
+const logger = createLogger()
 
 const agent = new https.Agent({
   keepAlive: true,
@@ -48,7 +51,7 @@ export async function simulateMessages ({ scenario, repetitions }) {
             TopicArn: sns.topicArn
           })
         )
-        console.log(`Simulating event: ${event.id} - ${event.type} (Repetition ${i + 1}, correlationId: ${correlationId})`)
+        logger.info(`Simulating event: ${event.id} - ${event.type} (Repetition ${i + 1}, correlationId: ${correlationId})`)
       }
     }
   }
