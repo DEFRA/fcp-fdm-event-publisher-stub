@@ -1,7 +1,5 @@
-import https from 'node:https'
 import crypto from 'node:crypto'
 import { PublishCommand, SNSClient } from '@aws-sdk/client-sns'
-import { NodeHttpHandler } from '@smithy/node-http-handler'
 import { config } from '../config.js'
 import { getScenario, listScenarios } from './scenarios.js'
 import { createLogger } from '../common/helpers/logging/logger.js'
@@ -10,24 +8,11 @@ const { sns, region, endpoint, accessKeyId, secretAccessKey } = config.get('aws'
 
 const logger = createLogger()
 
-const agent = new https.Agent({
-  keepAlive: true,
-  keepAliveMsecs: 1000,
-  maxSockets: 32,
-  maxFreeSockets: 10,
-  timeout: 60000
-})
-
 const snsClient = new SNSClient({
   region,
   ...(endpoint && {
     endpoint,
     credentials: { accessKeyId, secretAccessKey }
-  }),
-  requestHandler: new NodeHttpHandler({
-    httpsAgent: agent,
-    connectionTimeout: 2000,
-    socketTimeout: 30000
   })
 })
 
