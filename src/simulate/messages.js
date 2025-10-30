@@ -36,7 +36,6 @@ export async function simulateMessages ({ scenario, repetitions }) {
             TopicArn: sns.topicArn
           })
         )
-        logger.info(`Simulating event: ${event.id} - ${event.type} (Repetition ${i + 1}, correlationId: ${correlationId})`)
       }
     }
   }
