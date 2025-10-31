@@ -1,8 +1,11 @@
 import { constants as httpConstants } from 'node:http2'
 import Joi from 'joi'
 import { simulateMessages } from '../simulate/messages.js'
+import { createLogger } from '../common/helpers/logging/logger.js'
 
 const { HTTP_STATUS_ACCEPTED } = httpConstants
+
+const logger = createLogger()
 
 const messages = {
   method: 'POST',
@@ -23,10 +26,10 @@ const messages = {
 
     simulateMessages({ scenario, repetitions })
       .then(summary => {
-        request.logger.info(`Simulated messages summary: ${JSON.stringify(summary)}`)
+        logger.info(`Simulated messages summary: ${JSON.stringify(summary)}`)
       })
       .catch(err => {
-        request.logger.error(`Simulate messages failed: ${err.message}`)
+        logger.error(`Simulate messages failed: ${err.message}`)
       })
 
     return h.response({ status: 'ok', message: 'Simulation started' }).code(HTTP_STATUS_ACCEPTED)
