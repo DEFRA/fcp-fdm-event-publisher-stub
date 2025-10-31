@@ -2,11 +2,8 @@ import crypto from 'node:crypto'
 import { PublishCommand, SNSClient } from '@aws-sdk/client-sns'
 import { config } from '../config.js'
 import { getScenario, listScenarios } from './scenarios.js'
-import { createLogger } from '../common/helpers/logging/logger.js'
 
 const { sns, region, endpoint, accessKeyId, secretAccessKey } = config.get('aws')
-
-const logger = createLogger()
 
 const snsClient = new SNSClient({
   region,
