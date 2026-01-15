@@ -17,8 +17,6 @@ export async function simulateEvents ({ category, scenario, repetitions }) {
   const scenarios = getScenarios(category, scenario)
   let totalEvents = 0
 
-  console.log(scenarios)
-
   for (let i = 0; i < repetitions; i++) {
     for (const s of scenarios) {
       const correlationId = crypto.randomUUID()
