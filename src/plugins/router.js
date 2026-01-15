@@ -1,10 +1,10 @@
 import { config } from '../config.js'
 import { health } from '../routes/health.js'
-import { messages } from '../routes/messages.js'
+import { simulate } from '../routes/simulate.js'
 
 const isApiEnabled = config.get('api.enabled')
 
-const apiRoutes = isApiEnabled ? [messages] : []
+const apiRoutes = isApiEnabled ? [...simulate] : []
 
 const router = {
   plugin: {

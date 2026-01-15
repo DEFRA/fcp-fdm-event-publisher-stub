@@ -21,13 +21,19 @@ When the API is enabled (default for non-production environments) the following 
 
 | Method | Endpoint                          | Description                         |
 |--------|----------------------------------|-------------------------------------|
-| `POST` | `/api/v1/simulate/messages`      | Simulate the publishing of messages to FDM |
+| `POST` | `/api/v1/simulate`               | Simulate the publishing of events for all categories to FDM |
+| `POST` | `/api/v1/simulate/{category}`    | Simulate the publishing of events for a specific category to FDM |
+
+The `{category}` parameter can be one of:
+- `message` - Simulate message-related events
+- `document` - Simulate document-related events
+- `crm` - Simulate CRM-related events
 
 All `/api/v1/simulate` endpoints accept the following optional query parameters:
 
 | Parameter   | Type    | Description                                                                 |
 |-------------|---------|-----------------------------------------------------------------------------|
-| `scenario`  | String  | The name of a specific scenario to simulate. If not provided all scenarios will be simulated. |
+| `scenario`  | String  | The name of a specific scenario to simulate. If not provided, all scenarios (or all scenarios for the specified category) will be simulated. |
 | `repetitions` | Integer | The number of times to repeat the scenario(s). Default is `1`. |
 
 ## Requirements

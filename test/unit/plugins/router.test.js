@@ -3,7 +3,7 @@ import { expect, test, describe, beforeEach, vi } from 'vitest'
 vi.mock('../../../src/routes/health.js')
 
 const { health } = await import('../../../src/routes/health.js')
-const { messages } = await import('../../../src/routes/messages.js')
+const { simulate } = await import('../../../src/routes/simulate.js')
 
 const mockServer = {
   route: vi.fn()
@@ -34,8 +34,8 @@ describe('router plugin', () => {
     expect(mockServer.route).toHaveBeenCalledWith(expect.arrayContaining([health]))
   })
 
-  test('should register messages route', () => {
+  test('should register simulate routes', () => {
     router.plugin.register(mockServer)
-    expect(mockServer.route).toHaveBeenCalledWith(expect.arrayContaining([messages]))
+    expect(mockServer.route).toHaveBeenCalledWith(expect.arrayContaining([...simulate]))
   })
 })

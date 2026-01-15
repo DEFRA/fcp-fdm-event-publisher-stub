@@ -13,9 +13,11 @@ const snsClient = new SNSClient({
   })
 })
 
-export async function simulateMessages ({ scenario, repetitions }) {
-  const scenarios = getScenarios(scenario)
+export async function simulateEvents ({ category, scenario, repetitions }) {
+  const scenarios = getScenarios(category, scenario)
   let totalEvents = 0
+
+  console.log(scenarios)
 
   for (let i = 0; i < repetitions; i++) {
     for (const s of scenarios) {
@@ -40,10 +42,17 @@ export async function simulateMessages ({ scenario, repetitions }) {
   return { scenarios: scenarios.length, events: totalEvents, repetitions }
 }
 
-function getScenarios (scenario) {
+function getScenarios (category, scenario) {
   const wrap = x => Array.isArray(x) ? x : [x]
   if (scenario) {
     return [wrap(getScenario(scenario))]
   }
-  return listScenarios().map(s => wrap(getScenario(s.path)))
+  const allScenarios = listScenarios()
+
+  // Filter scenarios by category prefix if category is provided
+  const filteredScenarios = category
+    ? allScenarios.filter(s => s.path.startsWith(category))
+    : allScenarios
+
+  return filteredScenarios.map(s => wrap(getScenario(s.path)))
 }
