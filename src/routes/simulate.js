@@ -16,7 +16,7 @@ const simulate = [{
     tags: ['api', 'simulate'],
     validate: {
       params: {
-        category: Joi.string().valid('message', 'document', 'crm').required().description('The category of events to simulate')
+        category: Joi.string().valid('message', 'document', 'crm', 'payment').required().description('The category of events to simulate')
       },
       query: {
         scenario: Joi.string().allow('').description('The scenario to simulate events for. If not provided, all scenarios for the category will be used'),
