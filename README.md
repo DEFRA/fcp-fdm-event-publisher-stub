@@ -28,6 +28,7 @@ The `{category}` parameter can be one of:
 - `message` - Simulate message-related events
 - `document` - Simulate document-related events
 - `crm` - Simulate CRM-related events
+- `payment` - Simulate payment-related events
 
 All `/api/v1/simulate` endpoints accept the following optional query parameters:
 
