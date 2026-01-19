@@ -239,3 +239,178 @@ export const crmCaseUpdated = {
     ]
   }
 }
+
+export const paymentExtracted = {
+  id: '850e8400-e29b-41d4-a716-446655440001',
+  source: 'ffc-pay-batch-processor',
+  specversion: '1.0',
+  type: 'uk.gov.defra.ffc.pay.payment.extracted',
+  datacontenttype: 'text/json',
+  time: '2023-10-17T14:45:01.000Z',
+  partitionKey: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+  rowKey: '1234567890|S000000010000001V001|1570702210000',
+  data: {
+    frn: 1234567890,
+    correlationId: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+    sbi: 123456789,
+    schemeId: 1,
+    invoiceNumber: 'S000000010000001V001',
+    contractNumber: '01234567',
+    batch: 'SITISFI0001_AP_202303300929301234.dat',
+    paymentRequestNumber: 1,
+    marketingYear: 2023,
+    sourceSystem: 'SFI',
+    agreementNumber: 'SIP0000000000001',
+    value: 80000,
+    invoiceLines: [
+      {
+        description: 'G00 - Gross value of payment',
+        value: 100000
+      },
+      {
+        description: 'P24 - Penalty',
+        value: -20000
+      }
+    ]
+  }
+}
+
+export const paymentEnriched = {
+  id: '850e8400-e29b-41d4-a716-446655440002',
+  source: 'ffc-pay-enrichment',
+  specversion: '1.0',
+  type: 'uk.gov.defra.ffc.pay.payment.enriched',
+  datacontenttype: 'text/json',
+  time: '2023-10-17T14:46:01.000Z',
+  partitionKey: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+  rowKey: '1234567890|S000000010000001V001|1570702210000',
+  data: {
+    frn: 1234567890,
+    correlationId: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+    sbi: 123456789,
+    schemeId: 1,
+    invoiceNumber: 'S000000010000001V001',
+    contractNumber: '01234567',
+    batch: 'SITISFI0001_AP_202303300929301234.dat',
+    paymentRequestNumber: 1,
+    marketingYear: 2023,
+    sourceSystem: 'SFI',
+    agreementNumber: 'SIP0000000000001',
+    value: 80000,
+    invoiceLines: [
+      {
+        description: 'G00 - Gross value of payment',
+        value: 100000
+      },
+      {
+        description: 'P24 - Penalty',
+        value: -20000
+      }
+    ]
+  }
+}
+
+export const paymentProcessed = {
+  id: '850e8400-e29b-41d4-a716-446655440003',
+  source: 'ffc-pay-processing',
+  specversion: '1.0',
+  type: 'uk.gov.defra.ffc.pay.payment.processed',
+  datacontenttype: 'text/json',
+  time: '2023-10-17T14:47:01.000Z',
+  partitionKey: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+  rowKey: '1234567890|S000000010000001V001|1570702210000',
+  data: {
+    frn: 1234567890,
+    correlationId: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+    sbi: 123456789,
+    schemeId: 1,
+    invoiceNumber: 'S000000010000001V001',
+    contractNumber: '01234567',
+    batch: 'SITISFI0001_AP_202303300929301234.dat',
+    paymentRequestNumber: 1,
+    marketingYear: 2023,
+    sourceSystem: 'SFI',
+    agreementNumber: 'SIP0000000000001',
+    value: 80000,
+    invoiceLines: [
+      {
+        description: 'G00 - Gross value of payment',
+        value: 100000
+      },
+      {
+        description: 'P24 - Penalty',
+        value: -20000
+      }
+    ]
+  }
+}
+
+export const paymentSubmitted = {
+  id: '850e8400-e29b-41d4-a716-446655440004',
+  source: 'ffc-pay-submission',
+  specversion: '1.0',
+  type: 'uk.gov.defra.ffc.pay.payment.submitted',
+  datacontenttype: 'text/json',
+  time: '2023-10-17T14:48:01.000Z',
+  partitionKey: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+  rowKey: '1234567890|S000000010000001V001|1570702210000',
+  data: {
+    frn: 1234567890,
+    correlationId: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+    sbi: 123456789,
+    schemeId: 1,
+    invoiceNumber: 'S000000010000001V001',
+    contractNumber: '01234567',
+    batch: 'SITISFI0001_AP_202303300929301234.dat',
+    paymentRequestNumber: 1,
+    marketingYear: 2023,
+    sourceSystem: 'SFI',
+    agreementNumber: 'SIP0000000000001',
+    value: 80000,
+    invoiceLines: [
+      {
+        description: 'G00 - Gross value of payment',
+        value: 100000
+      },
+      {
+        description: 'P24 - Penalty',
+        value: -20000
+      }
+    ]
+  }
+}
+
+export const paymentAcknowledged = {
+  id: '850e8400-e29b-41d4-a716-446655440005',
+  source: 'ffc-pay-responses',
+  specversion: '1.0',
+  type: 'uk.gov.defra.ffc.pay.payment.acknowledged',
+  datacontenttype: 'text/json',
+  time: '2023-10-17T14:49:01.000Z',
+  partitionKey: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+  rowKey: '1234567890|S000000010000001V001|1570702210000',
+  data: {
+    frn: 1234567890,
+    correlationId: 'c0a80163-7b0b-4a9e-9c0e-1c9a9a9a9a9a',
+    sbi: 123456789,
+    schemeId: 1,
+    invoiceNumber: 'S000000010000001V001',
+    contractNumber: '01234567',
+    batch: 'SITISFI0001_AP_202303300929301234.dat',
+    paymentRequestNumber: 1,
+    marketingYear: 2023,
+    sourceSystem: 'SFI',
+    agreementNumber: 'SIP0000000000001',
+    value: 80000,
+    invoiceLines: [
+      {
+        description: 'G00 - Gross value of payment',
+        value: 100000
+      },
+      {
+        description: 'P24 - Penalty',
+        value: -20000
+      }
+    ]
+  }
+}
