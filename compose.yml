@@ -4,27 +4,36 @@ services:
       context: .
       target: development
     depends_on:
-      localstack:
-        condition: service_healthy
+      floci-init:
+        condition: service_completed_successfully
     environment:
       AWS_REGION: eu-west-2
       AWS_ACCESS_KEY_ID: test
       AWS_SECRET_ACCESS_KEY: test
       AWS_SNS_TOPIC_ARN: arn:aws:sns:eu-west-2:000000000000:fcp_event_publisher
-      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_ENDPOINT_URL: http://floci:4566
     volumes:
       - ./src:/home/node/src
       - ./package.json:/home/node/package.json
 
-  localstack:
-    image: localstack/localstack
+  floci:
+    image: hectorvent/floci:latest
     environment:
-      LS_LOG: warn
-      SERVICES: sqs,sns
+      FLOCI_HOSTNAME: floci
+      FLOCI_DEFAULT_REGION: eu-west-2
       AWS_ACCESS_KEY_ID: test
       AWS_SECRET_ACCESS_KEY: test
-    healthcheck:
-      test: ['CMD', 'curl', 'localhost:4566']
-      interval: 5s
-      start_period: 5s
-      retries: 3
+
+  floci-init:
+    image: amazon/aws-cli
+    entrypoint: /bin/sh
+    command: /init.sh
+    environment:
+      AWS_REGION: eu-west-2
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_ENDPOINT_URL: http://floci:4566
+    volumes:
+      - ./floci/init.sh:/init.sh
+    depends_on:
+      - floci

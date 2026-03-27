@@ -122,11 +122,15 @@ export function getScenario (path) {
   let current = scenarios
 
   for (const part of parts) {
-    if (current[part]) {
-      current = current[part]
-    } else {
+    if (current[part] === undefined) {
+      // Allow bare names (e.g. "messageSuccessful") by searching single/streams
+      const found = Object.values(scenarios).find(group => path in group)
+      if (found) {
+        return found[path]
+      }
       throw new Error(`Scenario not found: ${path}`)
     }
+    current = current[part]
   }
 
   return current
