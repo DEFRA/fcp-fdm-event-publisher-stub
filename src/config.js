@@ -81,7 +81,7 @@ const config = convict({
       env: 'AWS_REGION'
     },
     endpoint: {
-      doc: 'AWS endpoint URL, for example to use with LocalStack',
+      doc: 'AWS endpoint URL, for example to use with Floci for local development',
       format: String,
       nullable: true,
       default: null,

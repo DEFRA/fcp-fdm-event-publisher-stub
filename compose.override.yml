@@ -7,13 +7,16 @@ services:
     networks:
       - fcp-fdm
 
-  localstack:
+  floci:
     ports:
       - '4566:4566'
       - '4510-4559:4510-4559'
     volumes:
-      - ./localstack/localstack.sh:/etc/localstack/init/ready.d/localstack.sh
-      - localstack-data:/var/lib/localstack
+      - floci-data:/app/data
+    networks:
+      - fcp-fdm
+
+  floci-init:
     networks:
       - fcp-fdm
 
@@ -23,4 +26,4 @@ networks:
     name: fcp-fdm
 
 volumes:
-  localstack-data:
+  floci-data:

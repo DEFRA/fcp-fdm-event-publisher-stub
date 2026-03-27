@@ -49,7 +49,7 @@ function getScenarios (category, scenario) {
 
   // Filter scenarios by category prefix if category is provided
   const filteredScenarios = category
-    ? allScenarios.filter(s => s.path.startsWith(category))
+    ? allScenarios.filter(s => s.path.split('.').at(-1).startsWith(category))
     : allScenarios
 
   return filteredScenarios.map(s => wrap(getScenario(s.path)))
