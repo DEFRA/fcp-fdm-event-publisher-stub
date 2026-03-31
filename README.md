@@ -4,6 +4,8 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-event-publisher-stub&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-event-publisher-stub)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-event-publisher-stub&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-event-publisher-stub)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-event-publisher-stub&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-event-publisher-stub)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/DEFRA/fcp-fdm-event-publisher-stub/blob/main/.github/dependabot.yml)
+[![Dependency Review](https://github.com/DEFRA/fcp-fdm-event-publisher-stub/actions/workflows/check-pull-request.yml/badge.svg)](https://github.com/DEFRA/fcp-fdm-event-publisher-stub/actions/workflows/check-pull-request.yml)
 
 # Farming Data Model (FDM)
 
