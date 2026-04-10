@@ -6,9 +6,9 @@ const mockSend = vi.fn()
 
 // Mock the SNS client before importing the module
 vi.mock('@aws-sdk/client-sns', () => ({
-  SNSClient: vi.fn().mockImplementation(() => ({
-    send: mockSend
-  })),
+  SNSClient: vi.fn().mockImplementation(function () {
+    return { send: mockSend }
+  }),
   PublishCommand: vi.fn()
 }))
 
