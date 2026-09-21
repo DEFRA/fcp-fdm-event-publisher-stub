@@ -24,19 +24,55 @@ When the API is enabled (default for non-production environments) the following 
 |--------|----------------------------------|-------------------------------------|
 | `POST` | `/api/v1/simulate`               | Simulate the publishing of events for all categories to FDM |
 | `POST` | `/api/v1/simulate/{category}`    | Simulate the publishing of events for a specific category to FDM |
+| `GET`  | `/api/v1/simulate/{category}`    | Query the pre-canned event(s) for a scenario, or list available scenarios for a specific category |
 
 The `{category}` parameter can be one of:
 - `message` - Simulate message-related events
 - `document` - Simulate document-related events
 - `crm` - Simulate CRM-related events
 - `payment` - Simulate payment-related events
+- `raw` - Publish a caller-supplied raw event payload, provided in the request body (only available via `/api/v1/simulate/{category}`)
 
 All `/api/v1/simulate` endpoints accept the following optional query parameters:
 
 | Parameter   | Type    | Description                                                                 |
 |-------------|---------|-----------------------------------------------------------------------------|
-| `scenario`  | String  | The name of a specific scenario to simulate. If not provided, all scenarios (or all scenarios for the specified category) will be simulated. |
+| `scenario`  | String  | The name of a specific scenario to simulate. If not provided, all scenarios (or all scenarios for the specified category) will be simulated. Not applicable when `category` is `raw`. |
 | `repetitions` | Integer | The number of times to repeat the scenario(s). Default is `1`. |
+
+### Publishing a raw event
+
+When `category` is `raw`, `POST /api/v1/simulate/raw` requires a JSON request body containing a `data` object, e.g.:
+
+```json
+{
+  "type": "uk.gov.defra.ffc.pay.payment.extracted",
+  "data": {
+    "schemeId": 9
+  }
+}
+```
+
+The body is published as-is, except `id`, `time`, and `data.correlationId` are always overwritten before publishing. `repetitions` is supported and publishes the same body that many times, each with a fresh `id`, `time`, and `correlationId`. `scenario` must not be supplied alongside `category=raw`, and a request body is rejected for any other category.
+
+### Querying pre-canned events
+
+The `GET /api/v1/simulate/{category}` endpoint lets you look up the pre-canned event(s) used by a scenario, to use as a starting point for a `raw` payload (`category` cannot be `raw` here, as it has no pre-canned events):
+
+| Parameter  | Type   | Description                                                                 |
+|------------|--------|-------------------------------------------------------------------------------|
+| `scenario` | String | The name of a specific scenario to return the pre-canned event(s) for. If not provided, the available scenarios (or those for the specified category) are listed instead of a specific event. |
+
+For example, `GET /api/v1/simulate/payment?scenario=single.paymentExtracted` returns:
+
+```json
+{
+  "scenario": "single.paymentExtracted",
+  "events": [ { "specversion": "1.0", "type": "uk.gov.defra.ffc.pay.payment.extracted", "data": { "...": "..." } } ]
+}
+```
+
+An unknown `scenario` returns `404`. Omitting `scenario` (e.g. `GET /api/v1/simulate/payment`) instead returns `{ "category": "payment", "scenarios": [ { "path": "...", "count": ... }, ... ] }`.
 
 ## Requirements
 
