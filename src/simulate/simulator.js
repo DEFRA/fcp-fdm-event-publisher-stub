@@ -13,8 +13,8 @@ const snsClient = new SNSClient({
   })
 })
 
-export async function simulateEvents ({ category, scenario, repetitions }) {
-  const scenarios = getScenarios(category, scenario)
+export async function simulateEvents ({ category, scenario, repetitions, rawPayload }) {
+  const scenarios = category === 'raw' ? [[rawPayload]] : getScenarios(category, scenario)
   let totalEvents = 0
 
   for (let i = 0; i < repetitions; i++) {

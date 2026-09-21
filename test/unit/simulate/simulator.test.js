@@ -291,4 +291,55 @@ describe('simulator', () => {
     // But the two correlationIds should be different
     expect(correlationIds[0]).not.toBe(correlationIds[2])
   })
+
+  test('should publish a raw payload for the raw category', async () => {
+    mockSend.mockResolvedValue({})
+
+    const result = await simulateEvents({
+      category: 'raw',
+      repetitions: 1,
+      rawPayload: { type: 'custom.event', data: { foo: 'bar' } }
+    })
+
+    expect(result).toEqual({
+      scenarios: 1,
+      events: 1,
+      repetitions: 1
+    })
+
+    expect(getScenario).not.toHaveBeenCalled()
+    expect(listScenarios).not.toHaveBeenCalled()
+    expect(mockSend).toHaveBeenCalledTimes(1)
+
+    const sentMessage = JSON.parse(PublishCommand.mock.calls[0][0].Message)
+
+    expect(sentMessage.type).toBe('custom.event')
+    expect(sentMessage.data.foo).toBe('bar')
+    expect(sentMessage.id).toEqual(expect.any(String))
+    expect(sentMessage.time).toEqual(expect.any(String))
+    expect(sentMessage.data.correlationId).toEqual(expect.any(String))
+  })
+
+  test('should support repetitions for the raw category', async () => {
+    mockSend.mockResolvedValue({})
+
+    const result = await simulateEvents({
+      category: 'raw',
+      repetitions: 3,
+      rawPayload: { type: 'custom.event', data: { foo: 'bar' } }
+    })
+
+    expect(result).toEqual({
+      scenarios: 1,
+      events: 3,
+      repetitions: 3
+    })
+
+    expect(mockSend).toHaveBeenCalledTimes(3)
+
+    const messages = PublishCommand.mock.calls.map(call => JSON.parse(call[0].Message))
+
+    expect(new Set(messages.map(m => m.id)).size).toBe(3)
+    expect(new Set(messages.map(m => m.data.correlationId)).size).toBe(3)
+  })
 })
