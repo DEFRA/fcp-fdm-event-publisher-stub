@@ -1,7 +1,7 @@
 {
   "name": "fcp-fdm-event-publisher-stub",
   "version": "0.0.0",
-  "description": "fcp-fdm-event-publisher-stub",
+  "description": "Simulates FCP events published to the Farming Operation Data Store (FODS)",
   "main": "src/index.js",
   "type": "module",
   "scripts": {

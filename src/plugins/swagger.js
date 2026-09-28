@@ -4,7 +4,7 @@ import HapiSwagger from 'hapi-swagger'
 
 const swaggerOptions = {
   info: {
-    title: 'FCP Farming Data Model Event Publisher Stub',
+    title: 'FCP Farming Operation Data Store Event Publisher Stub',
   }
 }
 
