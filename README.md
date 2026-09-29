@@ -6,15 +6,17 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DEFRA_fcp-fdm-event-publisher-stub&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DEFRA_fcp-fdm-event-publisher-stub)
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/DEFRA/fcp-fdm-event-publisher-stub/blob/main/.github/dependabot.yml)
 
-# Farming Data Model (FDM)
+# Farming Operation Data Store (FODS) Event Publisher Stub
 
-The Farming Data Model (FDM) service is a common component to support data exchange between Farming and Countryside Programme (FCP) services.
+The Farming Operation Data Store (FODS) service is a common component to support data exchange between Farming and Countryside Programme (FCP) services.
 
-FDM subscribes to events across the FCP ecosystem via an AWS SQS queue. These events are persisted and precompiled into a data model which can be queried via REST API endpoints.
+> FODS was previously known as the Farming Data Model (FDM). Repository, image, service and resource names retain the `fdm` identifier for CDP compatibility.
 
-This stub service simulates the publishing of events to FDM consistent with those published by other FCP services.
+FODS subscribes to events across the FCP ecosystem via an AWS SQS queue. These events are persisted and precompiled into a data model which can be queried via REST API endpoints.
 
-The intention of the stub is to support local development and performance testing of FDM without the need to deploy and configure the full suite of FCP services.
+This stub service simulates the publishing of events to FODS consistent with those published by other FCP services.
+
+The intention of the stub is to support local development and performance testing of FODS without the need to deploy and configure the full suite of FCP services.
 
 ## API
 
@@ -22,8 +24,8 @@ When the API is enabled (default for non-production environments) the following 
 
 | Method | Endpoint                          | Description                         |
 |--------|----------------------------------|-------------------------------------|
-| `POST` | `/api/v1/simulate`               | Simulate the publishing of events for all categories to FDM |
-| `POST` | `/api/v1/simulate/{category}`    | Simulate the publishing of events for a specific category to FDM |
+| `POST` | `/api/v1/simulate`               | Simulate the publishing of events for all categories to FODS |
+| `POST` | `/api/v1/simulate/{category}`    | Simulate the publishing of events for a specific category to FODS |
 
 The `{category}` parameter can be one of:
 - `message` - Simulate message-related events
