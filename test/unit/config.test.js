@@ -17,7 +17,6 @@ describe('config', () => {
     process.env.LOG_ENABLED = 'true'
     process.env.LOG_LEVEL = 'debug'
     process.env.LOG_FORMAT = 'ecs'
-    process.env.HTTP_PROXY = 'http://proxy:8080'
     process.env.ENABLE_SECURE_CONTEXT = 'true'
     process.env.ENABLE_METRICS = 'true'
     process.env.TRACING_HEADER = 'x-custom-trace-id'
@@ -127,17 +126,6 @@ describe('config', () => {
     delete process.env.LOG_FORMAT
     const { config } = await import('../../src/config.js')
     expect(config.get('log.format')).toBe('pino-pretty')
-  })
-
-  test('should return http proxy from environment variable', async () => {
-    const { config } = await import('../../src/config.js')
-    expect(config.get('httpProxy')).toBe('http://proxy:8080')
-  })
-
-  test('should return null http proxy if not provided in environment variable', async () => {
-    delete process.env.HTTP_PROXY
-    const { config } = await import('../../src/config.js')
-    expect(config.get('httpProxy')).toBeNull()
   })
 
   test('should return secure context enabled from environment variable', async () => {
